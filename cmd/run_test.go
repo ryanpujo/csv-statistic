@@ -91,6 +91,19 @@ func TestRun(t *testing.T) {
 				}
 			},
 		},
+		"invalid actions": {
+			act:   "som",
+			col:   5,
+			files: []string{"../testdata/sell.csv"},
+			assert: func(t *testing.T, err error, out bytes.Buffer) {
+				if err == nil {
+					t.Errorf("expected error : %s, but got nil", err)
+				}
+				if !errors.Is(err, ErrInvalidActions) {
+					t.Errorf("expected error: %s but got %s", ErrInvalidActions, err)
+				}
+			},
+		},
 	}
 
 	for k, v := range testTable {

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"strconv"
+	"strings"
 )
 
 func CsvToFloat(reader io.Reader, col int) ([]float64, error) {
@@ -29,7 +30,7 @@ func CsvToFloat(reader io.Reader, col int) ([]float64, error) {
 		if len(row) <= col {
 			return nil, fmt.Errorf("%w:%d", ErrInvalidCol, col)
 		}
-		v, err := strconv.ParseFloat(row[col], 64)
+		v, err := strconv.ParseFloat(strings.TrimSpace(row[col]), 64)
 		if err != nil {
 			return nil, fmt.Errorf("%w:%s", ErrNotNumber, err)
 		}

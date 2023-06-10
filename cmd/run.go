@@ -31,6 +31,8 @@ func Run(filenames []string, act string, col int64, out io.Writer) error {
 		actFunc = actions.Sum
 	case "avg":
 		actFunc = actions.Avg
+	case "med":
+		actFunc = actions.Median
 	default:
 		return fmt.Errorf("%w:%s", ErrInvalidActions, act)
 	}
